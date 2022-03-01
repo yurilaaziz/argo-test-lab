@@ -4,7 +4,7 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: jenkins
-  namespace: 6daaf1c576378a32-jenkins
+  namespace: 6daaf1c576378a32
   labels:
     "app.kubernetes.io/name": 'jenkins'
     "helm.sh/chart": "jenkins-3.11.5"
@@ -17,7 +17,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: jenkins
-  namespace: 6daaf1c576378a32-jenkins
+  namespace: 6daaf1c576378a32
   labels:
     "app.kubernetes.io/name": 'jenkins'
     "helm.sh/chart": "jenkins-3.11.5"
@@ -34,7 +34,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: jenkins
-  namespace: 6daaf1c576378a32-jenkins
+  namespace: 6daaf1c576378a32
   labels:
     "app.kubernetes.io/name": 'jenkins'
     "app.kubernetes.io/managed-by": "Helm"
@@ -76,7 +76,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: jenkins-jenkins-config-auth-strategy-setting
-  namespace: 6daaf1c576378a32-jenkins
+  namespace: 6daaf1c576378a32
   labels:
     "app.kubernetes.io/name": jenkins
     "helm.sh/chart": "jenkins-3.11.5"
@@ -110,7 +110,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: jenkins-jenkins-config-keycloak-settings
-  namespace: 6daaf1c576378a32-jenkins
+  namespace: 6daaf1c576378a32
   labels:
     "app.kubernetes.io/name": jenkins
     "helm.sh/chart": "jenkins-3.11.5"
@@ -139,7 +139,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: jenkins-jenkins-config-welcome-message
-  namespace: 6daaf1c576378a32-jenkins
+  namespace: 6daaf1c576378a32
   labels:
     "app.kubernetes.io/name": jenkins
     "helm.sh/chart": "jenkins-3.11.5"
@@ -157,7 +157,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: jenkins-jenkins-jcasc-config
-  namespace: 6daaf1c576378a32-jenkins
+  namespace: 6daaf1c576378a32
   labels:
     "app.kubernetes.io/name": jenkins
     "helm.sh/chart": "jenkins-3.11.5"
@@ -183,11 +183,11 @@ data:
           defaultsProviderTemplate: ""
           connectTimeout: "5"
           readTimeout: "15"
-          jenkinsUrl: "http://jenkins.6daaf1c576378a32-jenkins.svc.cluster.local:8080"
-          jenkinsTunnel: "jenkins-agent.6daaf1c576378a32-jenkins.svc.cluster.local:50000"
+          jenkinsUrl: "http://jenkins.6daaf1c576378a32.svc.cluster.local:8080"
+          jenkinsTunnel: "jenkins-agent.6daaf1c576378a32.svc.cluster.local:50000"
           maxRequestsPerHostStr: "32"
           name: "kubernetes"
-          namespace: "6daaf1c576378a32-jenkins"
+          namespace: "6daaf1c576378a32"
           serverUrl: "https://kubernetes.default"
           podLabels:
           - key: "jenkins/jenkins-jenkins-agent"
@@ -203,7 +203,7 @@ data:
                 envVars:
                   - envVar:
                       key: "JENKINS_URL"
-                      value: "http://jenkins.6daaf1c576378a32-jenkins.svc.cluster.local:8080/"
+                      value: "http://jenkins.6daaf1c576378a32.svc.cluster.local:8080/"
                 image: "jenkins/inbound-agent:4.11.2-4"
                 privileged: "false"
                 resourceLimitCpu: 512m
@@ -241,7 +241,7 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: jenkins
-  namespace: 6daaf1c576378a32-jenkins
+  namespace: 6daaf1c576378a32
   labels:
     "app.kubernetes.io/name": 'jenkins'
     "helm.sh/chart": "jenkins-3.11.5"
@@ -261,7 +261,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   name: jenkins-schedule-agents
-  namespace: 6daaf1c576378a32-jenkins
+  namespace: 6daaf1c576378a32
   labels:
     "app.kubernetes.io/name": 'jenkins'
     "helm.sh/chart": "jenkins-3.11.5"
@@ -283,7 +283,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   name: jenkins-casc-reload
-  namespace: 6daaf1c576378a32-jenkins
+  namespace: 6daaf1c576378a32
   labels:
     "app.kubernetes.io/name": 'jenkins'
     "helm.sh/chart": "jenkins-3.11.5"
@@ -302,7 +302,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: jenkins-schedule-agents
-  namespace: 6daaf1c576378a32-jenkins
+  namespace: 6daaf1c576378a32
   labels:
     "app.kubernetes.io/name": 'jenkins'
     "helm.sh/chart": "jenkins-3.11.5"
@@ -316,14 +316,14 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: jenkins
-  namespace: 6daaf1c576378a32-jenkins
+  namespace: 6daaf1c576378a32
 ---
 # Source: jenkins/templates/rbac.yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: jenkins-watch-configmaps
-  namespace: 6daaf1c576378a32-jenkins
+  namespace: 6daaf1c576378a32
   labels:
     "app.kubernetes.io/name": 'jenkins'
     "helm.sh/chart": "jenkins-3.11.5"
@@ -337,14 +337,14 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: jenkins
-  namespace: 6daaf1c576378a32-jenkins
+  namespace: 6daaf1c576378a32
 ---
 # Source: jenkins/templates/jenkins-agent-svc.yaml
 apiVersion: v1
 kind: Service
 metadata:
   name: jenkins-agent
-  namespace: 6daaf1c576378a32-jenkins
+  namespace: 6daaf1c576378a32
   labels:
     "app.kubernetes.io/name": 'jenkins'
     "helm.sh/chart": "jenkins-3.11.5"
@@ -366,7 +366,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: jenkins
-  namespace: 6daaf1c576378a32-jenkins
+  namespace: 6daaf1c576378a32
   labels:
     "app.kubernetes.io/name": 'jenkins'
     "helm.sh/chart": "jenkins-3.11.5"
@@ -388,7 +388,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: jenkins
-  namespace: 6daaf1c576378a32-jenkins
+  namespace: 6daaf1c576378a32
   labels:
     "app.kubernetes.io/name": 'jenkins'
     "helm.sh/chart": "jenkins-3.11.5"
@@ -544,7 +544,7 @@ spec:
             - name: FOLDER
               value: "/var/jenkins_home/casc_configs"
             - name: NAMESPACE
-              value: '6daaf1c576378a32-jenkins'
+              value: '6daaf1c576378a32'
             - name: REQ_URL
               value: "http://localhost:8080/reload-configuration-as-code/?casc-reload-token=$(POD_NAME)"
             - name: REQ_METHOD
@@ -584,7 +584,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  namespace: 6daaf1c576378a32-jenkins
+  namespace: 6daaf1c576378a32
   labels:
     "app.kubernetes.io/name": 'jenkins'
     "helm.sh/chart": "jenkins-3.11.5"
@@ -619,7 +619,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: jenkins-tests
-  namespace: 6daaf1c576378a32-jenkins
+  namespace: 6daaf1c576378a32
   annotations:
     "helm.sh/hook": test
 data:
@@ -633,7 +633,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: "jenkins-ui-test-cfnz8"
-  namespace: 6daaf1c576378a32-jenkins
+  namespace: 6daaf1c576378a32
   annotations:
     "helm.sh/hook": test-success
 spec:
@@ -675,7 +675,7 @@ apiVersion: policy/v1beta1
 kind: PodDisruptionBudget
 metadata:
   name: gitlab-gitaly
-  namespace: 6daaf1c576378a32-gitlab
+  namespace: 6daaf1c576378a32
   labels:
     app: gitaly
     chart: gitaly-5.8.2
@@ -694,7 +694,7 @@ apiVersion: policy/v1beta1
 kind: PodDisruptionBudget
 metadata:
   name: gitlab-gitlab-shell
-  namespace: 6daaf1c576378a32-gitlab
+  namespace: 6daaf1c576378a32
   labels:
     app: gitlab-shell
     chart: gitlab-shell-5.8.2
@@ -713,7 +713,7 @@ apiVersion: policy/v1beta1
 kind: PodDisruptionBudget
 metadata:
   name: gitlab-sidekiq-all-in-1-v1
-  namespace: 6daaf1c576378a32-gitlab
+  namespace: 6daaf1c576378a32
   labels:
     app: sidekiq
     chart: sidekiq-5.8.2
@@ -734,7 +734,7 @@ apiVersion: policy/v1beta1
 kind: PodDisruptionBudget
 metadata:
   name: gitlab-webservice-default
-  namespace: 6daaf1c576378a32-gitlab
+  namespace: 6daaf1c576378a32
   labels:
     app: webservice
     chart: webservice-5.8.2
@@ -757,7 +757,7 @@ apiVersion: policy/v1beta1
 kind: PodDisruptionBudget
 metadata:
   name: gitlab-minio-v1
-  namespace: 6daaf1c576378a32-gitlab
+  namespace: 6daaf1c576378a32
   labels:
     app: minio
     chart: minio-0.4.3
@@ -777,7 +777,7 @@ apiVersion: policy/v1beta1
 kind: PodDisruptionBudget
 metadata:
   name: gitlab-registry-v1
-  namespace: 6daaf1c576378a32-gitlab
+  namespace: 6daaf1c576378a32
   labels:
     app: registry
     chart: registry-0.7.0
@@ -796,7 +796,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: gitlab-gitaly
-  namespace: 6daaf1c576378a32-gitlab
+  namespace: 6daaf1c576378a32
   labels:
     app: gitaly
     chart: gitaly-5.8.2
@@ -856,7 +856,7 @@ data:
     # location of shared secret for GitLab Shell / API interaction
     secret_file = "/etc/gitlab-secrets/shell/.gitlab_shell_secret"
     # URL of API
-    url = "http://gitlab-webservice-default.6daaf1c576378a32-gitlab.svc:8181/"
+    url = "http://gitlab-webservice-default.6daaf1c576378a32.svc:8181/"
 
     [gitlab.http-settings]
     # read_timeout = 300
@@ -875,7 +875,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: gitlab-gitlab-exporter
-  namespace: 6daaf1c576378a32-gitlab
+  namespace: 6daaf1c576378a32
   labels:
     app: gitlab-exporter
     chart: gitlab-exporter-5.8.2
@@ -894,7 +894,7 @@ data:
         methods:
           - probe_db
         opts:
-          connection_string: dbname=gitlabhq_production user=gitlab host=gitlab-postgresql.6daaf1c576378a32-gitlab.svc port=5432 password='<%= File.read('/etc/gitlab/postgres/psql-password-main').strip.gsub(/[\'\\]/) { |esc| '\\' + esc } %>'
+          connection_string: dbname=gitlabhq_production user=gitlab host=gitlab-postgresql.6daaf1c576378a32.svc port=5432 password='<%= File.read('/etc/gitlab/postgres/psql-password-main').strip.gsub(/[\'\\]/) { |esc| '\\' + esc } %>'
       database:
         multiple: true
         ci_builds:
@@ -917,7 +917,7 @@ data:
           - probe_retries
           - probe_stats
         opts:
-          redis_url: redis://:<%= ERB::Util::url_encode(File.read("/etc/gitlab/redis/redis-password").strip) %>@gitlab-redis-master.6daaf1c576378a32-gitlab.svc:6379
+          redis_url: redis://:<%= ERB::Util::url_encode(File.read("/etc/gitlab/redis/redis-password").strip) %>@gitlab-redis-master.6daaf1c576378a32.svc:6379
           redis_enable_client: false
 
       ruby: &ruby
@@ -965,7 +965,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: gitlab-gitlab-shell-sshd
-  namespace: 6daaf1c576378a32-gitlab
+  namespace: 6daaf1c576378a32
   labels:
     app: gitlab-shell
     chart: gitlab-shell-5.8.2
@@ -1125,7 +1125,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: gitlab-gitlab-shell
-  namespace: 6daaf1c576378a32-gitlab
+  namespace: 6daaf1c576378a32
   labels:
     app: gitlab-shell
     chart: gitlab-shell-5.8.2
@@ -1156,7 +1156,7 @@ data:
     user: git
 
     # Url to gitlab instance. Used for api calls. Should end with a slash.
-    gitlab_url: "http://gitlab-webservice-default.6daaf1c576378a32-gitlab.svc:8181/"
+    gitlab_url: "http://gitlab-webservice-default.6daaf1c576378a32.svc:8181/"
 
     secret_file: /etc/gitlab-secrets/shell/.gitlab_shell_secret
 
@@ -1185,7 +1185,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: gitlab-nginx-ingress-tcp
-  namespace: 6daaf1c576378a32-gitlab
+  namespace: 6daaf1c576378a32
   labels:
     app: gitlab-shell
     chart: gitlab-shell-5.8.2
@@ -1193,14 +1193,14 @@ metadata:
     heritage: Helm
     
 data:
-  "22": "6daaf1c576378a32-gitlab/gitlab-gitlab-shell:22"
+  "22": "6daaf1c576378a32/gitlab-gitlab-shell:22"
 ---
 # Source: gitlab/charts/gitlab/charts/migrations/templates/configmap.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: gitlab-migrations
-  namespace: 6daaf1c576378a32-gitlab
+  namespace: 6daaf1c576378a32
   labels:
     app: migrations
     chart: migrations-5.8.2
@@ -1220,7 +1220,7 @@ data:
         database: gitlabhq_production
         username: gitlab
         password: <%= File.read('/etc/gitlab/postgres/psql-password-main').strip.to_json %>
-        host: "gitlab-postgresql.6daaf1c576378a32-gitlab.svc"
+        host: "gitlab-postgresql.6daaf1c576378a32.svc"
         port: 5432
         connect_timeout: 
         keepalives: 
@@ -1234,7 +1234,7 @@ data:
         
   resque.yml.erb: |
     production:
-      url: redis://:<%= ERB::Util::url_encode(File.read("/etc/gitlab/redis/redis-password").strip) %>@gitlab-redis-master.6daaf1c576378a32-gitlab.svc:6379
+      url: redis://:<%= ERB::Util::url_encode(File.read("/etc/gitlab/redis/redis-password").strip) %>@gitlab-redis-master.6daaf1c576378a32.svc:6379
       
       id:
   
@@ -1242,7 +1242,7 @@ data:
   
   cable.yml.erb: |
     production:
-      url: redis://:<%= ERB::Util::url_encode(File.read("/etc/gitlab/redis/redis-password").strip) %>@gitlab-redis-master.6daaf1c576378a32-gitlab.svc:6379
+      url: redis://:<%= ERB::Util::url_encode(File.read("/etc/gitlab/redis/redis-password").strip) %>@gitlab-redis-master.6daaf1c576378a32.svc:6379
       
       id:
       adapter: redis
@@ -1260,7 +1260,7 @@ data:
         storages: # You must have at least a `default` storage path.
           default:
             path: /var/opt/gitlab/repo
-            gitaly_address: tcp://gitlab-gitaly-0.gitlab-gitaly.6daaf1c576378a32-gitlab.svc:8075
+            gitaly_address: tcp://gitlab-gitaly-0.gitlab-gitaly.6daaf1c576378a32.svc:8075
           
       
       sidekiq:
@@ -1290,7 +1290,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: gitlab-sidekiq
-  namespace: 6daaf1c576378a32-gitlab
+  namespace: 6daaf1c576378a32
   labels:
     app: sidekiq
     chart: sidekiq-5.8.2
@@ -1309,7 +1309,7 @@ data:
         database: gitlabhq_production
         username: gitlab
         password: <%= File.read('/etc/gitlab/postgres/psql-password-main').strip.to_json %>
-        host: "gitlab-postgresql.6daaf1c576378a32-gitlab.svc"
+        host: "gitlab-postgresql.6daaf1c576378a32.svc"
         port: 5432
         connect_timeout: 
         keepalives: 
@@ -1325,7 +1325,7 @@ data:
     
   resque.yml.erb: |
     production:
-      url: redis://:<%= ERB::Util::url_encode(File.read("/etc/gitlab/redis/redis-password").strip) %>@gitlab-redis-master.6daaf1c576378a32-gitlab.svc:6379
+      url: redis://:<%= ERB::Util::url_encode(File.read("/etc/gitlab/redis/redis-password").strip) %>@gitlab-redis-master.6daaf1c576378a32.svc:6379
       
       id:
   
@@ -1333,7 +1333,7 @@ data:
   
   cable.yml.erb: |
     production:
-      url: redis://:<%= ERB::Util::url_encode(File.read("/etc/gitlab/redis/redis-password").strip) %>@gitlab-redis-master.6daaf1c576378a32-gitlab.svc:6379
+      url: redis://:<%= ERB::Util::url_encode(File.read("/etc/gitlab/redis/redis-password").strip) %>@gitlab-redis-master.6daaf1c576378a32.svc:6379
       
       id:
       adapter: redis
@@ -1390,7 +1390,7 @@ data:
             provider: AWS
             region: us-east-1
             host: minio.6daaf1c576378a32.y.thehotpython.com
-            endpoint: http://gitlab-minio-svc.6daaf1c576378a32-gitlab.svc:9000
+            endpoint: http://gitlab-minio-svc.6daaf1c576378a32.svc:9000
             path_style: true
             aws_access_key_id: <%= File.read('/etc/gitlab/minio/accesskey').strip.to_json %>
             aws_secret_access_key: <%= File.read('/etc/gitlab/minio/secretkey').strip.to_json %>
@@ -1406,7 +1406,7 @@ data:
             provider: AWS
             region: us-east-1
             host: minio.6daaf1c576378a32.y.thehotpython.com
-            endpoint: http://gitlab-minio-svc.6daaf1c576378a32-gitlab.svc:9000
+            endpoint: http://gitlab-minio-svc.6daaf1c576378a32.svc:9000
             path_style: true
             aws_access_key_id: <%= File.read('/etc/gitlab/minio/accesskey').strip.to_json %>
             aws_secret_access_key: <%= File.read('/etc/gitlab/minio/secretkey').strip.to_json %>
@@ -1422,7 +1422,7 @@ data:
             provider: AWS
             region: us-east-1
             host: minio.6daaf1c576378a32.y.thehotpython.com
-            endpoint: http://gitlab-minio-svc.6daaf1c576378a32-gitlab.svc:9000
+            endpoint: http://gitlab-minio-svc.6daaf1c576378a32.svc:9000
             path_style: true
             aws_access_key_id: <%= File.read('/etc/gitlab/minio/accesskey').strip.to_json %>
             aws_secret_access_key: <%= File.read('/etc/gitlab/minio/secretkey').strip.to_json %>
@@ -1438,7 +1438,7 @@ data:
             provider: AWS
             region: us-east-1
             host: minio.6daaf1c576378a32.y.thehotpython.com
-            endpoint: http://gitlab-minio-svc.6daaf1c576378a32-gitlab.svc:9000
+            endpoint: http://gitlab-minio-svc.6daaf1c576378a32.svc:9000
             path_style: true
             aws_access_key_id: <%= File.read('/etc/gitlab/minio/accesskey').strip.to_json %>
             aws_secret_access_key: <%= File.read('/etc/gitlab/minio/secretkey').strip.to_json %>
@@ -1477,7 +1477,7 @@ data:
             aws_access_key_id: <%= File.read('/etc/gitlab/minio/accesskey').strip.to_json %>
             aws_secret_access_key: <%= File.read('/etc/gitlab/minio/secretkey').strip.to_json %>
             host: minio.6daaf1c576378a32.y.thehotpython.com
-            endpoint: http://gitlab-minio-svc.6daaf1c576378a32-gitlab.svc:9000
+            endpoint: http://gitlab-minio-svc.6daaf1c576378a32.svc:9000
             path_style: true
       
       sentry:
@@ -1506,7 +1506,7 @@ data:
             provider: AWS
             region: us-east-1
             host: minio.6daaf1c576378a32.y.thehotpython.com
-            endpoint: http://gitlab-minio-svc.6daaf1c576378a32-gitlab.svc:9000
+            endpoint: http://gitlab-minio-svc.6daaf1c576378a32.svc:9000
             path_style: true
             aws_access_key_id: <%= File.read('/etc/gitlab/minio/accesskey').strip.to_json %>
             aws_secret_access_key: <%= File.read('/etc/gitlab/minio/secretkey').strip.to_json %>
@@ -1519,7 +1519,7 @@ data:
       registry:
         enabled: true
         host: registry.6daaf1c576378a32.y.thehotpython.com
-        api_url: http://gitlab-registry.6daaf1c576378a32-gitlab.svc:5000
+        api_url: http://gitlab-registry.6daaf1c576378a32.svc:5000
         key: /etc/gitlab/registry/gitlab-registry.key
         issuer: gitlab-issuer
         notification_secret: <%= YAML.load_file("/etc/gitlab/registry/notificationSecret").flatten.first %>
@@ -1550,7 +1550,7 @@ data:
         storages: # You must have at least a `default` storage path.
           default:
             path: /var/opt/gitlab/repo
-            gitaly_address: tcp://gitlab-gitaly-0.gitlab-gitaly.6daaf1c576378a32-gitlab.svc:8075
+            gitaly_address: tcp://gitlab-gitaly-0.gitlab-gitaly.6daaf1c576378a32.svc:8075
           
       backup:
         path: "tmp/backups"   # Relative paths are relative to Rails.root (default: tmp/backups/)
@@ -1600,7 +1600,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: gitlab-toolbox
-  namespace: 6daaf1c576378a32-gitlab
+  namespace: 6daaf1c576378a32
   labels:
     app: toolbox
     chart: toolbox-5.8.2
@@ -1617,7 +1617,7 @@ data:
         database: gitlabhq_production
         username: gitlab
         password: <%= File.read('/etc/gitlab/postgres/psql-password-main').strip.to_json %>
-        host: "gitlab-postgresql.6daaf1c576378a32-gitlab.svc"
+        host: "gitlab-postgresql.6daaf1c576378a32.svc"
         port: 5432
         connect_timeout: 
         keepalives: 
@@ -1633,7 +1633,7 @@ data:
     
   resque.yml.erb: |
     production:
-      url: redis://:<%= ERB::Util::url_encode(File.read("/etc/gitlab/redis/redis-password").strip) %>@gitlab-redis-master.6daaf1c576378a32-gitlab.svc:6379
+      url: redis://:<%= ERB::Util::url_encode(File.read("/etc/gitlab/redis/redis-password").strip) %>@gitlab-redis-master.6daaf1c576378a32.svc:6379
       
       id:
   
@@ -1641,7 +1641,7 @@ data:
   
   cable.yml.erb: |
     production:
-      url: redis://:<%= ERB::Util::url_encode(File.read("/etc/gitlab/redis/redis-password").strip) %>@gitlab-redis-master.6daaf1c576378a32-gitlab.svc:6379
+      url: redis://:<%= ERB::Util::url_encode(File.read("/etc/gitlab/redis/redis-password").strip) %>@gitlab-redis-master.6daaf1c576378a32.svc:6379
       
       id:
       adapter: redis
@@ -1689,7 +1689,7 @@ data:
             provider: AWS
             region: us-east-1
             host: minio.6daaf1c576378a32.y.thehotpython.com
-            endpoint: http://gitlab-minio-svc.6daaf1c576378a32-gitlab.svc:9000
+            endpoint: http://gitlab-minio-svc.6daaf1c576378a32.svc:9000
             path_style: true
             aws_access_key_id: <%= File.read('/etc/gitlab/minio/accesskey').strip.to_json %>
             aws_secret_access_key: <%= File.read('/etc/gitlab/minio/secretkey').strip.to_json %>
@@ -1705,7 +1705,7 @@ data:
             provider: AWS
             region: us-east-1
             host: minio.6daaf1c576378a32.y.thehotpython.com
-            endpoint: http://gitlab-minio-svc.6daaf1c576378a32-gitlab.svc:9000
+            endpoint: http://gitlab-minio-svc.6daaf1c576378a32.svc:9000
             path_style: true
             aws_access_key_id: <%= File.read('/etc/gitlab/minio/accesskey').strip.to_json %>
             aws_secret_access_key: <%= File.read('/etc/gitlab/minio/secretkey').strip.to_json %>
@@ -1721,7 +1721,7 @@ data:
             provider: AWS
             region: us-east-1
             host: minio.6daaf1c576378a32.y.thehotpython.com
-            endpoint: http://gitlab-minio-svc.6daaf1c576378a32-gitlab.svc:9000
+            endpoint: http://gitlab-minio-svc.6daaf1c576378a32.svc:9000
             path_style: true
             aws_access_key_id: <%= File.read('/etc/gitlab/minio/accesskey').strip.to_json %>
             aws_secret_access_key: <%= File.read('/etc/gitlab/minio/secretkey').strip.to_json %>
@@ -1737,7 +1737,7 @@ data:
             provider: AWS
             region: us-east-1
             host: minio.6daaf1c576378a32.y.thehotpython.com
-            endpoint: http://gitlab-minio-svc.6daaf1c576378a32-gitlab.svc:9000
+            endpoint: http://gitlab-minio-svc.6daaf1c576378a32.svc:9000
             path_style: true
             aws_access_key_id: <%= File.read('/etc/gitlab/minio/accesskey').strip.to_json %>
             aws_secret_access_key: <%= File.read('/etc/gitlab/minio/secretkey').strip.to_json %>
@@ -1776,7 +1776,7 @@ data:
             aws_access_key_id: <%= File.read('/etc/gitlab/minio/accesskey').strip.to_json %>
             aws_secret_access_key: <%= File.read('/etc/gitlab/minio/secretkey').strip.to_json %>
             host: minio.6daaf1c576378a32.y.thehotpython.com
-            endpoint: http://gitlab-minio-svc.6daaf1c576378a32-gitlab.svc:9000
+            endpoint: http://gitlab-minio-svc.6daaf1c576378a32.svc:9000
             path_style: true
       
       sidekiq:
@@ -1799,7 +1799,7 @@ data:
             provider: AWS
             region: us-east-1
             host: minio.6daaf1c576378a32.y.thehotpython.com
-            endpoint: http://gitlab-minio-svc.6daaf1c576378a32-gitlab.svc:9000
+            endpoint: http://gitlab-minio-svc.6daaf1c576378a32.svc:9000
             path_style: true
             aws_access_key_id: <%= File.read('/etc/gitlab/minio/accesskey').strip.to_json %>
             aws_secret_access_key: <%= File.read('/etc/gitlab/minio/secretkey').strip.to_json %>
@@ -1812,7 +1812,7 @@ data:
       registry:
         enabled: true
         host: registry.6daaf1c576378a32.y.thehotpython.com
-        api_url: http://gitlab-registry.6daaf1c576378a32-gitlab.svc:5000
+        api_url: http://gitlab-registry.6daaf1c576378a32.svc:5000
         key: /etc/gitlab/registry/gitlab-registry.key
         issuer: gitlab-issuer
         notification_secret: <%= YAML.load_file("/etc/gitlab/registry/notificationSecret").flatten.first %>
@@ -1843,7 +1843,7 @@ data:
         storages: # You must have at least a `default` storage path.
           default:
             path: /var/opt/gitlab/repo
-            gitaly_address: tcp://gitlab-gitaly-0.gitlab-gitaly.6daaf1c576378a32-gitlab.svc:8075
+            gitaly_address: tcp://gitlab-gitaly-0.gitlab-gitaly.6daaf1c576378a32.svc:8075
           
       backup:
         path: "tmp/backups"   # Relative paths are relative to Rails.root (default: tmp/backups/)
@@ -1920,7 +1920,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: gitlab-webservice
-  namespace: 6daaf1c576378a32-gitlab
+  namespace: 6daaf1c576378a32
   labels:
     app: webservice
     chart: webservice-5.8.2
@@ -1939,7 +1939,7 @@ data:
         database: gitlabhq_production
         username: gitlab
         password: <%= File.read('/etc/gitlab/postgres/psql-password-main').strip.to_json %>
-        host: "gitlab-postgresql.6daaf1c576378a32-gitlab.svc"
+        host: "gitlab-postgresql.6daaf1c576378a32.svc"
         port: 5432
         connect_timeout: 
         keepalives: 
@@ -1955,7 +1955,7 @@ data:
     
   resque.yml.erb: |
     production:
-      url: redis://:<%= ERB::Util::url_encode(File.read("/etc/gitlab/redis/redis-password").strip) %>@gitlab-redis-master.6daaf1c576378a32-gitlab.svc:6379
+      url: redis://:<%= ERB::Util::url_encode(File.read("/etc/gitlab/redis/redis-password").strip) %>@gitlab-redis-master.6daaf1c576378a32.svc:6379
       
       id:
   
@@ -1963,7 +1963,7 @@ data:
   
   cable.yml.erb: |
     production:
-      url: redis://:<%= ERB::Util::url_encode(File.read("/etc/gitlab/redis/redis-password").strip) %>@gitlab-redis-master.6daaf1c576378a32-gitlab.svc:6379
+      url: redis://:<%= ERB::Util::url_encode(File.read("/etc/gitlab/redis/redis-password").strip) %>@gitlab-redis-master.6daaf1c576378a32.svc:6379
       
       id:
       adapter: redis
@@ -2020,7 +2020,7 @@ data:
             provider: AWS
             region: us-east-1
             host: minio.6daaf1c576378a32.y.thehotpython.com
-            endpoint: http://gitlab-minio-svc.6daaf1c576378a32-gitlab.svc:9000
+            endpoint: http://gitlab-minio-svc.6daaf1c576378a32.svc:9000
             path_style: true
             aws_access_key_id: <%= File.read('/etc/gitlab/minio/accesskey').strip.to_json %>
             aws_secret_access_key: <%= File.read('/etc/gitlab/minio/secretkey').strip.to_json %>
@@ -2036,7 +2036,7 @@ data:
             provider: AWS
             region: us-east-1
             host: minio.6daaf1c576378a32.y.thehotpython.com
-            endpoint: http://gitlab-minio-svc.6daaf1c576378a32-gitlab.svc:9000
+            endpoint: http://gitlab-minio-svc.6daaf1c576378a32.svc:9000
             path_style: true
             aws_access_key_id: <%= File.read('/etc/gitlab/minio/accesskey').strip.to_json %>
             aws_secret_access_key: <%= File.read('/etc/gitlab/minio/secretkey').strip.to_json %>
@@ -2052,7 +2052,7 @@ data:
             provider: AWS
             region: us-east-1
             host: minio.6daaf1c576378a32.y.thehotpython.com
-            endpoint: http://gitlab-minio-svc.6daaf1c576378a32-gitlab.svc:9000
+            endpoint: http://gitlab-minio-svc.6daaf1c576378a32.svc:9000
             path_style: true
             aws_access_key_id: <%= File.read('/etc/gitlab/minio/accesskey').strip.to_json %>
             aws_secret_access_key: <%= File.read('/etc/gitlab/minio/secretkey').strip.to_json %>
@@ -2068,7 +2068,7 @@ data:
             provider: AWS
             region: us-east-1
             host: minio.6daaf1c576378a32.y.thehotpython.com
-            endpoint: http://gitlab-minio-svc.6daaf1c576378a32-gitlab.svc:9000
+            endpoint: http://gitlab-minio-svc.6daaf1c576378a32.svc:9000
             path_style: true
             aws_access_key_id: <%= File.read('/etc/gitlab/minio/accesskey').strip.to_json %>
             aws_secret_access_key: <%= File.read('/etc/gitlab/minio/secretkey').strip.to_json %>
@@ -2123,7 +2123,7 @@ data:
             provider: AWS
             region: us-east-1
             host: minio.6daaf1c576378a32.y.thehotpython.com
-            endpoint: http://gitlab-minio-svc.6daaf1c576378a32-gitlab.svc:9000
+            endpoint: http://gitlab-minio-svc.6daaf1c576378a32.svc:9000
             path_style: true
             aws_access_key_id: <%= File.read('/etc/gitlab/minio/accesskey').strip.to_json %>
             aws_secret_access_key: <%= File.read('/etc/gitlab/minio/secretkey').strip.to_json %>
@@ -2159,7 +2159,7 @@ data:
         storages: # You must have at least a `default` storage path.
           default:
             path: /var/opt/gitlab/repo
-            gitaly_address: tcp://gitlab-gitaly-0.gitlab-gitaly.6daaf1c576378a32-gitlab.svc:8075
+            gitaly_address: tcp://gitlab-gitaly-0.gitlab-gitaly.6daaf1c576378a32.svc:8075
           
       backup:
         path: "tmp/backups"   # Relative paths are relative to Rails.root (default: tmp/backups/)
@@ -2192,7 +2192,7 @@ data:
       registry:
         enabled: true
         host: registry.6daaf1c576378a32.y.thehotpython.com
-        api_url: http://gitlab-registry.6daaf1c576378a32-gitlab.svc:5000
+        api_url: http://gitlab-registry.6daaf1c576378a32.svc:5000
         key: /etc/gitlab/registry/gitlab-registry.key
         issuer: gitlab-issuer
         notification_secret: <%= YAML.load_file("/etc/gitlab/registry/notificationSecret").flatten.first %>
@@ -2224,7 +2224,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: gitlab-workhorse-default
-  namespace: 6daaf1c576378a32-gitlab
+  namespace: 6daaf1c576378a32
   labels:
     app: webservice
     chart: webservice-5.8.2
@@ -2237,7 +2237,7 @@ data:
   workhorse-config.toml.tpl: |
     shutdown_timeout = "61s"
     [redis]
-    URL = "redis://gitlab-redis-master.6daaf1c576378a32-gitlab.svc:6379"
+    URL = "redis://gitlab-redis-master.6daaf1c576378a32.svc:6379"
     Password = {% file.Read "/etc/gitlab/redis/redis-password" | strings.TrimSpace | data.ToJSON %}
     {%- $supported_providers := slice "AWS" "AzureRM" -%}
     {%- $provider := "" -%}
@@ -2297,7 +2297,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: gitlab-webservice-tests
-  namespace: 6daaf1c576378a32-gitlab
+  namespace: 6daaf1c576378a32
 data:
   test_login: |
     set -e
@@ -2331,7 +2331,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: gitlab-minio-config-cm
-  namespace: 6daaf1c576378a32-gitlab
+  namespace: 6daaf1c576378a32
   labels:
     app: minio
     chart: minio-0.4.3
@@ -2555,7 +2555,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: gitlab-redis-scripts
-  namespace: "6daaf1c576378a32-gitlab"
+  namespace: "6daaf1c576378a32"
   labels:
     app: redis
     chart: redis-11.3.4
@@ -2588,7 +2588,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: gitlab-redis
-  namespace: "6daaf1c576378a32-gitlab"
+  namespace: "6daaf1c576378a32"
   labels:
     app: redis
     chart: redis-11.3.4
@@ -2616,7 +2616,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: gitlab-redis-health
-  namespace: "6daaf1c576378a32-gitlab"
+  namespace: "6daaf1c576378a32"
   labels:
     app: redis
     chart: redis-11.3.4
@@ -2709,7 +2709,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: gitlab-registry
-  namespace: 6daaf1c576378a32-gitlab
+  namespace: 6daaf1c576378a32
   labels:
     app: registry
     chart: registry-0.7.0
@@ -2831,7 +2831,7 @@ data:
         accesskey: "ACCESS_KEY"
         secretkey: "SECRET_KEY"
         region: us-east-1
-        regionendpoint: http://gitlab-minio-svc.6daaf1c576378a32-gitlab.svc:9000
+        regionendpoint: http://gitlab-minio-svc.6daaf1c576378a32.svc:9000
         bucket: registry
         secure: true
         v4auth: true
@@ -2862,7 +2862,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: gitlab-gitlab-chart-info
-  namespace: 6daaf1c576378a32-gitlab
+  namespace: 6daaf1c576378a32
   labels:
     app: gitlab
     chart: gitlab-5.8.2
@@ -2878,7 +2878,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: gitlab-postgresql-init-db
-  namespace: 6daaf1c576378a32-gitlab
+  namespace: 6daaf1c576378a32
   labels:
     app: gitlab
     chart: gitlab-5.8.2
@@ -2901,7 +2901,7 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: gitlab-minio
-  namespace: 6daaf1c576378a32-gitlab
+  namespace: 6daaf1c576378a32
   labels:
     app: minio
     chart: minio-0.4.3
@@ -2921,7 +2921,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: gitlab-gitaly
-  namespace: 6daaf1c576378a32-gitlab
+  namespace: 6daaf1c576378a32
   labels:
     app: gitaly
     chart: gitaly-5.8.2
@@ -2947,7 +2947,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: gitlab-gitlab-exporter
-  namespace: 6daaf1c576378a32-gitlab
+  namespace: 6daaf1c576378a32
   labels:
     app: gitlab-exporter
     chart: gitlab-exporter-5.8.2
@@ -2973,7 +2973,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: gitlab-gitlab-shell
-  namespace: 6daaf1c576378a32-gitlab
+  namespace: 6daaf1c576378a32
   labels:
     app: gitlab-shell
     chart: gitlab-shell-5.8.2
@@ -2999,7 +2999,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: gitlab-webservice-default
-  namespace: 6daaf1c576378a32-gitlab
+  namespace: 6daaf1c576378a32
   labels:
     app: webservice
     chart: webservice-5.8.2
@@ -3032,7 +3032,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: gitlab-minio-svc
-  namespace: 6daaf1c576378a32-gitlab
+  namespace: 6daaf1c576378a32
   labels:
     app: minio
     chart: minio-0.4.3
@@ -3125,7 +3125,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: gitlab-redis-headless
-  namespace: "6daaf1c576378a32-gitlab"
+  namespace: "6daaf1c576378a32"
   labels:
     app: redis
     chart: redis-11.3.4
@@ -3147,7 +3147,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: gitlab-redis-metrics
-  namespace: "6daaf1c576378a32-gitlab"
+  namespace: "6daaf1c576378a32"
   labels:
     app: redis
     chart: redis-11.3.4
@@ -3170,7 +3170,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: gitlab-redis-master
-  namespace: "6daaf1c576378a32-gitlab"
+  namespace: "6daaf1c576378a32"
   labels:
     app: redis
     chart: redis-11.3.4
@@ -3192,7 +3192,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: gitlab-registry
-  namespace: 6daaf1c576378a32-gitlab
+  namespace: 6daaf1c576378a32
   labels:
     app: registry
     chart: registry-0.7.0
@@ -3218,7 +3218,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: gitlab-gitlab-exporter
-  namespace: 6daaf1c576378a32-gitlab
+  namespace: 6daaf1c576378a32
   labels:
     app: gitlab-exporter
     chart: gitlab-exporter-5.8.2
@@ -3403,7 +3403,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: gitlab-gitlab-shell
-  namespace: 6daaf1c576378a32-gitlab
+  namespace: 6daaf1c576378a32
   labels:
     app: gitlab-shell
     chart: gitlab-shell-5.8.2
@@ -3566,7 +3566,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: gitlab-sidekiq-all-in-1-v2
-  namespace: 6daaf1c576378a32-gitlab
+  namespace: 6daaf1c576378a32
   labels:
     app: sidekiq
     chart: sidekiq-5.8.2
@@ -3863,7 +3863,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: gitlab-toolbox
-  namespace: 6daaf1c576378a32-gitlab
+  namespace: 6daaf1c576378a32
   labels:
     app: toolbox
     chart: toolbox-5.8.2
@@ -4095,7 +4095,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: gitlab-webservice-default
-  namespace: 6daaf1c576378a32-gitlab
+  namespace: 6daaf1c576378a32
   labels:
     app: webservice
     chart: webservice-5.8.2
@@ -4486,7 +4486,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: gitlab-minio
-  namespace: 6daaf1c576378a32-gitlab
+  namespace: 6daaf1c576378a32
   labels:
     app: minio
     chart: minio-0.4.3
@@ -4583,7 +4583,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: gitlab-registry
-  namespace: 6daaf1c576378a32-gitlab
+  namespace: 6daaf1c576378a32
   labels:
     app: registry
     chart: registry-0.7.0
@@ -4725,7 +4725,7 @@ apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
   name: gitlab-gitlab-shell
-  namespace: 6daaf1c576378a32-gitlab
+  namespace: 6daaf1c576378a32
   labels:
     app: gitlab-shell
     chart: gitlab-shell-5.8.2
@@ -4750,7 +4750,7 @@ apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
   name: gitlab-sidekiq-all-in-1-v2
-  namespace: 6daaf1c576378a32-gitlab
+  namespace: 6daaf1c576378a32
   labels:
     app: sidekiq
     chart: sidekiq-5.8.2
@@ -4775,7 +4775,7 @@ apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
   name: gitlab-webservice-default
-  namespace: 6daaf1c576378a32-gitlab
+  namespace: 6daaf1c576378a32
   labels:
     app: webservice
     chart: webservice-5.8.2
@@ -4801,7 +4801,7 @@ apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
   name: gitlab-registry
-  namespace: 6daaf1c576378a32-gitlab
+  namespace: 6daaf1c576378a32
   labels:
     app: registry
     chart: registry-0.7.0
@@ -4826,7 +4826,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: gitlab-gitaly
-  namespace: 6daaf1c576378a32-gitlab
+  namespace: 6daaf1c576378a32
   labels:
     app: gitaly
     chart: gitaly-5.8.2
@@ -5165,7 +5165,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: gitlab-redis-master
-  namespace: "6daaf1c576378a32-gitlab"
+  namespace: "6daaf1c576378a32"
   labels:
     app: redis
     chart: redis-11.3.4
@@ -5323,7 +5323,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: gitlab-migrations-1
-  namespace: 6daaf1c576378a32-gitlab
+  namespace: 6daaf1c576378a32
   labels:
     app: migrations
     chart: migrations-5.8.2
@@ -5476,7 +5476,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: gitlab-minio-create-buckets-1
-  namespace: 6daaf1c576378a32-gitlab
+  namespace: 6daaf1c576378a32
   labels:
     app: minio
     chart: minio-0.4.3
@@ -5513,7 +5513,7 @@ spec:
         command: ["/bin/sh", "/config/initialize"]
         env:
           - name: MINIO_ENDPOINT
-            value: gitlab-minio-svc.6daaf1c576378a32-gitlab.svc
+            value: gitlab-minio-svc.6daaf1c576378a32.svc
           - name: MINIO_PORT
             value: "9000"
         volumeMounts:
@@ -5528,7 +5528,7 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: gitlab-webservice-default
-  namespace: 6daaf1c576378a32-gitlab
+  namespace: 6daaf1c576378a32
   labels:
     app: webservice
     chart: webservice-5.8.2
@@ -5569,7 +5569,7 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: gitlab-minio
-  namespace: 6daaf1c576378a32-gitlab
+  namespace: 6daaf1c576378a32
   labels:
     app: minio
     chart: minio-0.4.3
@@ -5609,7 +5609,7 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: gitlab-registry
-  namespace: 6daaf1c576378a32-gitlab
+  namespace: 6daaf1c576378a32
   labels:
     app: registry
     chart: registry-0.7.0
@@ -5649,7 +5649,7 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: gitlab-shared-secrets
-  namespace: 6daaf1c576378a32-gitlab
+  namespace: 6daaf1c576378a32
   labels:
     app: gitlab
     chart: gitlab-5.8.2
@@ -5666,7 +5666,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: gitlab-shared-secrets
-  namespace: 6daaf1c576378a32-gitlab
+  namespace: 6daaf1c576378a32
   labels:
     app: gitlab
     chart: gitlab-5.8.2
@@ -5681,7 +5681,7 @@ data:
   generate-secrets: |
     # vim: set filetype=sh:
     
-    namespace=6daaf1c576378a32-gitlab
+    namespace=6daaf1c576378a32
     release=gitlab
     env=production
     
@@ -5855,7 +5855,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: gitlab-gitlab-upgrade-check
-  namespace: 6daaf1c576378a32-gitlab
+  namespace: 6daaf1c576378a32
   labels:
     app: gitlab
     chart: gitlab-5.8.2
@@ -5950,7 +5950,7 @@ kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: gitlab-shared-secrets
-  namespace: 6daaf1c576378a32-gitlab
+  namespace: 6daaf1c576378a32
   labels:
     app: shared-secrets
     chart: shared-secrets-5.8.2
@@ -5971,7 +5971,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: gitlab-shared-secrets
-  namespace: 6daaf1c576378a32-gitlab
+  namespace: 6daaf1c576378a32
   labels:
     app: shared-secrets
     chart: shared-secrets-5.8.2
@@ -5989,14 +5989,14 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: gitlab-shared-secrets
-    namespace: 6daaf1c576378a32-gitlab
+    namespace: 6daaf1c576378a32
 ---
 # Source: gitlab/charts/gitlab/charts/webservice/templates/tests/test-runner.yaml
 apiVersion: v1
 kind: Pod
 metadata:
   name: gitlab-webservice-test-runner-iqzls
-  namespace: 6daaf1c576378a32-gitlab
+  namespace: 6daaf1c576378a32
   annotations:
     "helm.sh/hook": test
     "helm.sh/hook-delete-policy": hook-succeeded,hook-failed,before-hook-creation
@@ -6029,7 +6029,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: gitlab-shared-secrets-1-rp1
-  namespace: 6daaf1c576378a32-gitlab
+  namespace: 6daaf1c576378a32
   labels:
     app: gitlab
     chart: gitlab-5.8.2
@@ -6082,7 +6082,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: gitlab-gitlab-upgrade-check
-  namespace: 6daaf1c576378a32-gitlab
+  namespace: 6daaf1c576378a32
   labels:
     app: gitlab
     chart: gitlab-5.8.2
