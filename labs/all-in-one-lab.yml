@@ -3,7 +3,6 @@
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  namespace: default
   name: jenkins
   namespace: default
   labels:
@@ -17,7 +16,6 @@ metadata:
 apiVersion: v1
 kind: Secret
 metadata:
-  namespace: default
   name: jenkins
   namespace: default
   labels:
@@ -28,14 +26,13 @@ metadata:
     "app.kubernetes.io/component": "jenkins-controller"
 type: Opaque
 data:
-  jenkins-admin-password: "M2lmMVZ4UVpaQ1FteDAwaDZuOW1zVA=="
+  jenkins-admin-password: "S2F5emlYR0RoN0dRUWxaTUNPNTBYeQ=="
   jenkins-admin-user: "YWRtaW4="
 ---
 # Source: jenkins/templates/config.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  namespace: default
   name: jenkins
   namespace: default
   labels:
@@ -78,7 +75,6 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  namespace: default
   name: jenkins-jenkins-config-auth-strategy-setting
   namespace: default
   labels:
@@ -113,7 +109,6 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  namespace: default
   name: jenkins-jenkins-config-keycloak-settings
   namespace: default
   labels:
@@ -143,7 +138,6 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  namespace: default
   name: jenkins-jenkins-config-welcome-message
   namespace: default
   labels:
@@ -162,7 +156,6 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  namespace: default
   name: jenkins-jenkins-jcasc-config
   namespace: default
   labels:
@@ -247,7 +240,6 @@ data:
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  namespace: default
   name: jenkins
   namespace: default
   labels:
@@ -268,7 +260,6 @@ spec:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  namespace: default
   name: jenkins-schedule-agents
   namespace: default
   labels:
@@ -291,7 +282,6 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  namespace: default
   name: jenkins-casc-reload
   namespace: default
   labels:
@@ -311,7 +301,6 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  namespace: default
   name: jenkins-schedule-agents
   namespace: default
   labels:
@@ -333,7 +322,6 @@ subjects:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  namespace: default
   name: jenkins-watch-configmaps
   namespace: default
   labels:
@@ -355,7 +343,6 @@ subjects:
 apiVersion: v1
 kind: Service
 metadata:
-  namespace: default
   name: jenkins-agent
   namespace: default
   labels:
@@ -378,7 +365,6 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  namespace: default
   name: jenkins
   namespace: default
   labels:
@@ -401,7 +387,6 @@ spec:
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  namespace: default
   name: jenkins
   namespace: default
   labels:
@@ -600,7 +585,6 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   namespace: default
-  namespace: default
   labels:
     "app.kubernetes.io/name": 'jenkins'
     "helm.sh/chart": "jenkins-3.11.5"
@@ -634,7 +618,6 @@ spec:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  namespace: default
   name: jenkins-tests
   namespace: default
   annotations:
@@ -649,8 +632,7 @@ data:
 apiVersion: v1
 kind: Pod
 metadata:
-  namespace: default
-  name: "jenkins-ui-test-lebcq"
+  name: "jenkins-ui-test-ktkkr"
   namespace: default
   annotations:
     "helm.sh/hook": test-success
@@ -692,7 +674,6 @@ spec:
 apiVersion: policy/v1beta1
 kind: PodDisruptionBudget
 metadata:
-  namespace: default
   name: gitlab-gitaly
   namespace: default
   labels:
@@ -712,7 +693,6 @@ spec:
 apiVersion: policy/v1beta1
 kind: PodDisruptionBudget
 metadata:
-  namespace: default
   name: gitlab-gitlab-shell
   namespace: default
   labels:
@@ -732,7 +712,6 @@ spec:
 apiVersion: policy/v1beta1
 kind: PodDisruptionBudget
 metadata:
-  namespace: default
   name: gitlab-sidekiq-all-in-1-v1
   namespace: default
   labels:
@@ -754,7 +733,6 @@ spec:
 apiVersion: policy/v1beta1
 kind: PodDisruptionBudget
 metadata:
-  namespace: default
   name: gitlab-webservice-default
   namespace: default
   labels:
@@ -778,7 +756,6 @@ spec:
 apiVersion: policy/v1beta1
 kind: PodDisruptionBudget
 metadata:
-  namespace: default
   name: gitlab-minio-v1
   namespace: default
   labels:
@@ -799,7 +776,6 @@ spec:
 apiVersion: policy/v1beta1
 kind: PodDisruptionBudget
 metadata:
-  namespace: default
   name: gitlab-registry-v1
   namespace: default
   labels:
@@ -819,7 +795,6 @@ spec:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  namespace: default
   name: gitlab-gitaly
   namespace: default
   labels:
@@ -899,7 +874,6 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  namespace: default
   name: gitlab-gitlab-exporter
   namespace: default
   labels:
@@ -990,7 +964,6 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  namespace: default
   name: gitlab-gitlab-shell-sshd
   namespace: default
   labels:
@@ -1151,7 +1124,6 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  namespace: default
   name: gitlab-gitlab-shell
   namespace: default
   labels:
@@ -1212,7 +1184,6 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  namespace: default
   name: gitlab-nginx-ingress-tcp
   namespace: default
   labels:
@@ -1228,7 +1199,6 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  namespace: default
   name: gitlab-migrations
   namespace: default
   labels:
@@ -1319,7 +1289,6 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  namespace: default
   name: gitlab-sidekiq
   namespace: default
   labels:
@@ -1630,7 +1599,6 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  namespace: default
   name: gitlab-toolbox
   namespace: default
   labels:
@@ -1951,7 +1919,6 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  namespace: default
   name: gitlab-webservice
   namespace: default
   labels:
@@ -2256,7 +2223,6 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  namespace: default
   name: gitlab-workhorse-default
   namespace: default
   labels:
@@ -2330,7 +2296,6 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  namespace: default
   name: gitlab-webservice-tests
   namespace: default
 data:
@@ -2365,7 +2330,6 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  namespace: default
   name: gitlab-minio-config-cm
   namespace: default
   labels:
@@ -2590,7 +2554,6 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  namespace: default
   name: gitlab-redis-scripts
   namespace: "default"
   labels:
@@ -2624,7 +2587,6 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  namespace: default
   name: gitlab-redis
   namespace: "default"
   labels:
@@ -2653,7 +2615,6 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  namespace: default
   name: gitlab-redis-health
   namespace: "default"
   labels:
@@ -2747,7 +2708,6 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  namespace: default
   name: gitlab-registry
   namespace: default
   labels:
@@ -2901,7 +2861,6 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  namespace: default
   name: gitlab-gitlab-chart-info
   namespace: default
   labels:
@@ -2918,7 +2877,6 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  namespace: default
   name: gitlab-postgresql-init-db
   namespace: default
   labels:
@@ -2942,7 +2900,6 @@ data:
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  namespace: default
   name: gitlab-minio
   namespace: default
   labels:
@@ -2963,7 +2920,6 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  namespace: default
   name: gitlab-gitaly
   namespace: default
   labels:
@@ -2990,7 +2946,6 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  namespace: default
   name: gitlab-gitlab-exporter
   namespace: default
   labels:
@@ -3017,7 +2972,6 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  namespace: default
   name: gitlab-gitlab-shell
   namespace: default
   labels:
@@ -3044,7 +2998,6 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  namespace: default
   name: gitlab-webservice-default
   namespace: default
   labels:
@@ -3078,7 +3031,6 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  namespace: default
   name: gitlab-minio-svc
   namespace: default
   labels:
@@ -3105,7 +3057,6 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  namespace: default
   name: gitlab-postgresql-metrics
   labels:
     app: postgresql
@@ -3130,7 +3081,6 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  namespace: default
   name: gitlab-postgresql-headless
   labels:
     app: postgresql
@@ -3152,7 +3102,6 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  namespace: default
   name: gitlab-postgresql
   labels:
     app: postgresql
@@ -3175,7 +3124,6 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  namespace: default
   name: gitlab-redis-headless
   namespace: "default"
   labels:
@@ -3198,7 +3146,6 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  namespace: default
   name: gitlab-redis-metrics
   namespace: "default"
   labels:
@@ -3222,7 +3169,6 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  namespace: default
   name: gitlab-redis-master
   namespace: "default"
   labels:
@@ -3245,7 +3191,6 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  namespace: default
   name: gitlab-registry
   namespace: default
   labels:
@@ -3272,7 +3217,6 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: default
   name: gitlab-gitlab-exporter
   namespace: default
   labels:
@@ -3458,7 +3402,6 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: default
   name: gitlab-gitlab-shell
   namespace: default
   labels:
@@ -3622,7 +3565,6 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: default
   name: gitlab-sidekiq-all-in-1-v2
   namespace: default
   labels:
@@ -3920,7 +3862,6 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: default
   name: gitlab-toolbox
   namespace: default
   labels:
@@ -4153,7 +4094,6 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: default
   name: gitlab-webservice-default
   namespace: default
   labels:
@@ -4545,7 +4485,6 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: default
   name: gitlab-minio
   namespace: default
   labels:
@@ -4643,7 +4582,6 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: default
   name: gitlab-registry
   namespace: default
   labels:
@@ -4786,7 +4724,6 @@ spec:
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
-  namespace: default
   name: gitlab-gitlab-shell
   namespace: default
   labels:
@@ -4812,7 +4749,6 @@ spec:
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
-  namespace: default
   name: gitlab-sidekiq-all-in-1-v2
   namespace: default
   labels:
@@ -4838,7 +4774,6 @@ spec:
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
-  namespace: default
   name: gitlab-webservice-default
   namespace: default
   labels:
@@ -4865,7 +4800,6 @@ spec:
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
-  namespace: default
   name: gitlab-registry
   namespace: default
   labels:
@@ -4891,7 +4825,6 @@ spec:
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  namespace: default
   name: gitlab-gitaly
   namespace: default
   labels:
@@ -5071,7 +5004,6 @@ spec:
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  namespace: default
   name: gitlab-postgresql
   labels:
     app: postgresql
@@ -5232,7 +5164,6 @@ spec:
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  namespace: default
   name: gitlab-redis-master
   namespace: "default"
   labels:
@@ -5391,7 +5322,6 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  namespace: default
   name: gitlab-migrations-1
   namespace: default
   labels:
@@ -5545,7 +5475,6 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  namespace: default
   name: gitlab-minio-create-buckets-1
   namespace: default
   labels:
@@ -5595,10 +5524,9 @@ spec:
             cpu: 50m
 ---
 # Source: gitlab/charts/gitlab/charts/webservice/templates/ingress.yaml
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  namespace: default
   name: gitlab-webservice-default
   namespace: default
   labels:
@@ -5609,7 +5537,7 @@ metadata:
     gitlab.com/webservice-name: default
     
   annotations:
-    kubernetes.io/ingress.class: "nginx"
+    
     kubernetes.io/ingress.provider: "nginx"
     nginx.ingress.kubernetes.io/proxy-body-size: "512m"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
@@ -5622,25 +5550,27 @@ metadata:
     nginx.ingress.kubernetes.io/limit-rps: "60"
     nginx.ingress.kubernetes.io/service-upstream: "true"
 spec:
-  
+  ingressClassName: "nginx"
   rules:
     - host: gitlab.6daaf1c576378a32.y.thehotpython.com
       http:
         paths:
           - path: /
+            pathType: Prefix
             backend:
-              serviceName: gitlab-webservice-default
-              servicePort: 8181
+              service:
+                  name: gitlab-webservice-default
+                  port:
+                    number: 8181
   tls:
     - hosts:
       - gitlab.6daaf1c576378a32.y.thehotpython.com
       secretName: 6daaf1c576378a32.y.thehotpython.com
 ---
 # Source: gitlab/charts/minio/templates/ingress.yaml
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  namespace: default
   name: gitlab-minio
   namespace: default
   labels:
@@ -5650,7 +5580,7 @@ metadata:
     heritage: Helm
     
   annotations:
-    kubernetes.io/ingress.class: "nginx"
+    
     kubernetes.io/ingress.provider: "nginx"
     nginx.ingress.kubernetes.io/proxy-body-size: "0"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "900"
@@ -5663,25 +5593,27 @@ metadata:
     nginx.ingress.kubernetes.io/limit-connections: "10"
     nginx.ingress.kubernetes.io/limit-rps: "60"
 spec:
-  
+  ingressClassName: "nginx"
   rules:
     - host: minio.6daaf1c576378a32.y.thehotpython.com
       http:
         paths:
           - path: /
+            pathType: Prefix
             backend:
-              serviceName: gitlab-minio-svc
-              servicePort: 9000
+              service:
+                  name: gitlab-minio-svc
+                  port:
+                    number: 9000
   tls:
     - hosts:
       - minio.6daaf1c576378a32.y.thehotpython.com
       secretName: 6daaf1c576378a32.y.thehotpython.com
 ---
 # Source: gitlab/charts/registry/templates/ingress.yaml
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  namespace: default
   name: gitlab-registry
   namespace: default
   labels:
@@ -5691,7 +5623,7 @@ metadata:
     heritage: Helm
     
   annotations:
-    kubernetes.io/ingress.class: "nginx"
+    
     kubernetes.io/ingress.provider: "nginx"
     nginx.ingress.kubernetes.io/proxy-body-size: "0"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "900"
@@ -5704,15 +5636,18 @@ metadata:
     nginx.ingress.kubernetes.io/limit-connections: "10"
     nginx.ingress.kubernetes.io/limit-rps: "60"
 spec:
-  
+  ingressClassName: "nginx"
   rules:
     - host: registry.6daaf1c576378a32.y.thehotpython.com
       http:
         paths:
           - path: /
+            pathType: Prefix
             backend:
-              serviceName: gitlab-registry
-              servicePort: 5000
+              service:
+                name: gitlab-registry
+                port:
+                  number:  5000
   tls:
     - hosts:
       - registry.6daaf1c576378a32.y.thehotpython.com
@@ -5722,7 +5657,6 @@ spec:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  namespace: default
   name: gitlab-shared-secrets
   namespace: default
   labels:
@@ -5740,7 +5674,6 @@ metadata:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  namespace: default
   name: gitlab-shared-secrets
   namespace: default
   labels:
@@ -5930,7 +5863,6 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  namespace: default
   name: gitlab-gitlab-upgrade-check
   namespace: default
   labels:
@@ -6026,7 +5958,6 @@ data:
 kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  namespace: default
   name: gitlab-shared-secrets
   namespace: default
   labels:
@@ -6048,7 +5979,6 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  namespace: default
   name: gitlab-shared-secrets
   namespace: default
   labels:
@@ -6074,8 +6004,7 @@ subjects:
 apiVersion: v1
 kind: Pod
 metadata:
-  namespace: default
-  name: gitlab-webservice-test-runner-yemfp
+  name: gitlab-webservice-test-runner-nryfk
   namespace: default
   annotations:
     "helm.sh/hook": test
@@ -6108,8 +6037,7 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  namespace: default
-  name: gitlab-shared-secrets-1-nxu
+  name: gitlab-shared-secrets-1-52w
   namespace: default
   labels:
     app: gitlab
@@ -6162,7 +6090,6 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  namespace: default
   name: gitlab-gitlab-upgrade-check
   namespace: default
   labels:
