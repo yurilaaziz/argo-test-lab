@@ -1,0 +1,26 @@
+---
+# Source: gitlab/charts/gitlab/charts/gitaly/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: gitlab-gitaly
+  namespace: default
+  labels:
+    app: gitaly
+    chart: gitaly-5.8.2
+    release: gitlab
+    heritage: Helm
+    
+    
+  annotations:
+    
+spec:
+  type: ClusterIP
+  clusterIP: "None"
+  ports:
+    - port: 8075
+      name: gitaly
+      targetPort: grcp-gitaly
+  selector:
+    app: gitaly
+    release: gitlab

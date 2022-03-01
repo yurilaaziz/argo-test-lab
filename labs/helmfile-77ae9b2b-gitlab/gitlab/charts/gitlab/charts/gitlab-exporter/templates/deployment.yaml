@@ -1,0 +1,185 @@
+---
+# Source: gitlab/charts/gitlab/charts/gitlab-exporter/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gitlab-gitlab-exporter
+  namespace: default
+  labels:
+    app: gitlab-exporter
+    chart: gitlab-exporter-5.8.2
+    release: gitlab
+    heritage: Helm
+    
+  annotations:
+    
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gitlab-exporter
+      release: gitlab
+      
+  template:
+    metadata:
+      labels:
+        app: gitlab-exporter
+        chart: gitlab-exporter-5.8.2
+        release: gitlab
+        heritage: Helm
+        
+        
+      annotations:
+        checksum/config: 38b1ffb5e2144c652d3612bed191499f38d870f6dc8826f8860d74ba862bc3bf
+        gitlab.com/prometheus_path: /metrics
+        gitlab.com/prometheus_port: "9168"
+        gitlab.com/prometheus_scrape: "true"
+        prometheus.io/path: /metrics
+        prometheus.io/port: "9168"
+        prometheus.io/scrape: "true"
+
+    spec:
+      securityContext:
+        runAsUser: 1000
+        fsGroup: 1000
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 1
+            podAffinityTerm:
+              topologyKey: "kubernetes.io/hostname"
+              labelSelector:
+                matchLabels:
+                  app: gitlab-exporter
+                  release: gitlab
+                  
+      automountServiceAccountToken: false
+      initContainers:
+        
+        - name: certificates
+          image: "registry.gitlab.com/gitlab-org/build/cng/alpine-certificates:20191127-r2"  
+          env:
+          
+          - name: MALLOC_CONF
+            value: "dirty_decay_ms:0,muzzy_decay_ms:0"
+          - name: RUBY_GC_HEAP_FREE_SLOTS_MAX_RATIO
+            value: "0.111"
+          - name: RUBY_GC_HEAP_FREE_SLOTS_MIN_RATIO
+            value: "0.055"
+          - name: RUBY_GC_HEAP_INIT_SLOTS
+            value: "80000"
+          volumeMounts:
+          - name: etc-ssl-certs
+            mountPath: /etc/ssl/certs
+            readOnly: false
+          resources:
+            requests:
+              cpu: 50m
+        - name: configure
+          command: ['sh', '/config/configure']
+          image: "registry.gitlab.com/gitlab-org/cloud-native/mirror/images/busybox:latest"          
+          env:
+          
+          - name: MALLOC_CONF
+            value: "dirty_decay_ms:0,muzzy_decay_ms:0"
+          - name: RUBY_GC_HEAP_FREE_SLOTS_MAX_RATIO
+            value: "0.111"
+          - name: RUBY_GC_HEAP_FREE_SLOTS_MIN_RATIO
+            value: "0.055"
+          - name: RUBY_GC_HEAP_INIT_SLOTS
+            value: "80000"
+          volumeMounts:
+          
+          
+          - name: gitlab-exporter-config
+            mountPath: /config
+            readOnly: true
+          - name: init-gitlab-exporter-secrets
+            mountPath: /init-config
+            readOnly: true
+          - name: gitlab-exporter-secrets
+            mountPath: /init-secrets
+            readOnly: false
+          resources:
+            requests:
+              cpu: 50m      
+      containers:
+        
+        - name: gitlab-exporter
+          image: "registry.gitlab.com/gitlab-org/build/cng/gitlab-exporter:11.11.0"          
+          env:
+            - name: CONFIG_TEMPLATE_DIRECTORY
+              value: '/var/opt/gitlab-exporter/templates'
+            - name: CONFIG_DIRECTORY
+              value: '/etc/gitlab-exporter'
+            
+            - name: MALLOC_CONF
+              value: "dirty_decay_ms:0,muzzy_decay_ms:0"
+            - name: RUBY_GC_HEAP_FREE_SLOTS_MAX_RATIO
+              value: "0.111"
+            - name: RUBY_GC_HEAP_FREE_SLOTS_MIN_RATIO
+              value: "0.055"
+            - name: RUBY_GC_HEAP_INIT_SLOTS
+              value: "80000"
+          ports:
+          - containerPort: 9168
+            name: gitlab-exporter
+          volumeMounts:
+            - name: gitlab-exporter-config
+              mountPath: /var/opt/gitlab-exporter/templates/gitlab-exporter.yml.erb
+              subPath: gitlab-exporter.yml.erb
+            - name: gitlab-exporter-secrets
+              mountPath: '/etc/gitlab'
+              readOnly: true
+            
+            - name: etc-ssl-certs
+              mountPath: /etc/ssl/certs/
+              readOnly: true
+          livenessProbe:
+            exec:
+              command:
+                - pgrep
+                - -f
+                - gitlab-exporter
+          readinessProbe:
+            exec:
+              command:
+                - pgrep
+                - -f
+                - gitlab-exporter
+          lifecycle:
+            preStop:
+              exec:
+                command: ["/bin/bash", "-c", "pkill -f 'gitlab-exporter'"]
+          resources:
+            requests:
+              cpu: 75m
+              memory: 100M
+      volumes:
+      
+      
+      - name: gitlab-exporter-config
+        configMap:
+          name: gitlab-gitlab-exporter
+      - name: init-gitlab-exporter-secrets
+        projected:
+          defaultMode: 0400
+          sources:
+          - secret:
+              name: "gitlab-postgresql-password"
+              items:
+                - key: "postgresql-password"
+                  path: postgres/psql-password-main
+          
+          - secret:
+              name: "gitlab-redis-secret"
+              items:
+                - key: "secret"
+                  path: redis/redis-password
+      - name: gitlab-exporter-secrets
+        emptyDir:
+          medium: "Memory"
+      
+      - name: etc-ssl-certs
+        emptyDir:
+          medium: "Memory"

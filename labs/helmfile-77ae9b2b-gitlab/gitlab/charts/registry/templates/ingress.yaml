@@ -1,0 +1,43 @@
+---
+# Source: gitlab/charts/registry/templates/ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: gitlab-registry
+  namespace: default
+  labels:
+    app: registry
+    chart: registry-0.7.0
+    release: gitlab
+    heritage: Helm
+    
+  annotations:
+    
+    kubernetes.io/ingress.provider: "nginx"
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "900"
+    nginx.ingress.kubernetes.io/proxy-request-buffering: "off"
+    nginx.ingress.kubernetes.io/proxy-buffering: "off"
+    
+    cert-manager.io/alt-names: "gitlab.6daaf1c576378a32.y.thehotpython.com,minio.6daaf1c576378a32.y.thehotpython.com,registry.6daaf1c576378a32.y.thehotpython.com,6daaf1c576378a32.y.thehotpython.com"
+    cert-manager.io/cluster-issuer: "letsencrypt-staging"
+    kubernetes.io/tls-acme: "true"
+    nginx.ingress.kubernetes.io/limit-connections: "10"
+    nginx.ingress.kubernetes.io/limit-rps: "60"
+spec:
+  ingressClassName: "nginx"
+  rules:
+    - host: registry.6daaf1c576378a32.y.thehotpython.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: gitlab-registry
+                port:
+                  number:  5000
+  tls:
+    - hosts:
+      - registry.6daaf1c576378a32.y.thehotpython.com
+      secretName: 6daaf1c576378a32.y.thehotpython.com

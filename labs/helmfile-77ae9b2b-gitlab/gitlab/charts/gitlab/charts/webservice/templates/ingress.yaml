@@ -1,0 +1,44 @@
+---
+# Source: gitlab/charts/gitlab/charts/webservice/templates/ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: gitlab-webservice-default
+  namespace: default
+  labels:
+    app: webservice
+    chart: webservice-5.8.2
+    release: gitlab
+    heritage: Helm
+    gitlab.com/webservice-name: default
+    
+  annotations:
+    
+    kubernetes.io/ingress.provider: "nginx"
+    nginx.ingress.kubernetes.io/proxy-body-size: "512m"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "15"
+    
+    cert-manager.io/alt-names: "gitlab.6daaf1c576378a32.y.thehotpython.com,minio.6daaf1c576378a32.y.thehotpython.com,registry.6daaf1c576378a32.y.thehotpython.com,6daaf1c576378a32.y.thehotpython.com"
+    cert-manager.io/cluster-issuer: "letsencrypt-staging"
+    kubernetes.io/tls-acme: "true"
+    nginx.ingress.kubernetes.io/limit-connections: "10"
+    nginx.ingress.kubernetes.io/limit-rps: "60"
+    nginx.ingress.kubernetes.io/service-upstream: "true"
+spec:
+  ingressClassName: "nginx"
+  rules:
+    - host: gitlab.6daaf1c576378a32.y.thehotpython.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                  name: gitlab-webservice-default
+                  port:
+                    number: 8181
+  tls:
+    - hosts:
+      - gitlab.6daaf1c576378a32.y.thehotpython.com
+      secretName: 6daaf1c576378a32.y.thehotpython.com

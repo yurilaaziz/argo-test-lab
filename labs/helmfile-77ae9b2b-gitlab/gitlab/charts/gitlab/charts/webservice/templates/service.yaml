@@ -1,0 +1,33 @@
+---
+# Source: gitlab/charts/gitlab/charts/webservice/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: gitlab-webservice-default
+  namespace: default
+  labels:
+    app: webservice
+    chart: webservice-5.8.2
+    release: gitlab
+    heritage: Helm
+    
+    gitlab.com/webservice-name: default
+    
+  annotations:
+    
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
+      name: http-webservice
+    - port: 8181
+      targetPort: 8181
+      protocol: TCP
+      name: http-workhorse
+  selector:
+    app: webservice
+    release: gitlab
+    
+    gitlab.com/webservice-name: default
